@@ -2,23 +2,25 @@
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#the_iterable_protocol
 
 function logForOf(iterable) {
-  for (let i of iterable) {
+  for (const i of iterable) {
     console.log(i);
   }
 }
 
 async function logForAwaitOf(asyncIterable) {
-  for await (let i of asyncIterable) {
+  for await (const i of asyncIterable) {
     console.log(i);
   }
 }
+
+// --------------------------------------------------------
 
 // Arrays are iterable by default
 const someArray = [1, "second", { order: 3 }, () => console.log("4")];
 
 // logForOf(someArray);
 
-// ---------------------------------------------------
+// --------------------------------------------------------
 
 // Objects can be iterable if have an `[Sybmol.iterator]` property
 const loadingDots = {
@@ -60,9 +62,26 @@ const loading = loadingDots[Symbol.iterator]();
 //   console.log(value);
 // }, 500);
 
-// ------------------------------------------
+// we can simulate some fake api delay
 
-// Functions can be iterable if returns an
+const fakeAPIDelay = (duration = 300) =>
+  new Promise((res) => {
+    setTimeout(() => {
+      res(true);
+    }, duration);
+  });
+
+// (async () => {
+//   for (const loadingDot of loadingDots) {
+//     await fakeAPIDelay(); // simple wait time
+//     console.log(loadingDot);
+//   }
+//   console.log("Finished!");
+// })();
+
+// --------------------------------------------------------
+
+// Functions can be iterable if return an
 // object with an `next` function that returns
 // another object with `value` and `done` properties
 
@@ -84,11 +103,11 @@ function squared(max) {
   };
 }
 
-const squaredIt = squared(4);
+const squaredIt = squared(5);
 
 // logForOf(squaredIt);
 
-// -----------------------------------------------------
+// --------------------------------------------------------
 
 const createHumanIterator = (age = 0, lifespan = 75) => {
   const that = {
@@ -117,7 +136,7 @@ const personIt = createHumanIterator(7, 11);
 //   await logForAwaitOf(personIt);
 // })();
 
-// ----------------------------------
+// --------------------------------------------------------
 
 // iterators are also supported in es6 classes
 
@@ -149,7 +168,7 @@ const numbersListIt = new NumbersList();
 
 // ---------------------------------------
 
-// Iterators can run asyncronously
+// Iterators can run asynchronously
 
 const dogs = async (totalDogs = 3) => {
   const apiPath = "https://dog.ceo/api/breeds/image/random";
