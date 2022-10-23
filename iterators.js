@@ -1,24 +1,12 @@
 // more info about Iteration Protocol
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Iteration_protocols#the_iterable_protocol
 
-function logForOf(iterable) {
-  for (const i of iterable) {
-    console.log(i);
-  }
-}
-
-async function logForAwaitOf(asyncIterable) {
-  for await (const i of asyncIterable) {
-    console.log(i);
-  }
-}
-
-// --------------------------------------------------------
-
 // Arrays are iterable by default
 const someArray = [1, "second", { order: 3 }, () => console.log("4")];
 
-// logForOf(someArray);
+// for (const i of someArray) {
+//   console.log(i);
+// }
 
 // --------------------------------------------------------
 
@@ -105,7 +93,9 @@ function squared(max) {
 
 const squaredIt = squared(5);
 
-// logForOf(squaredIt);
+// for (const i of squaredIt) {
+//   console.log(i);
+// }
 
 // --------------------------------------------------------
 
@@ -120,7 +110,7 @@ const createHumanIterator = (age = 0, lifespan = 75) => {
         that.growUp();
 
         return Promise.resolve({
-          value: { ...that },
+          value: that.age,
           done: that.age > lifespan,
         });
       },
@@ -130,10 +120,12 @@ const createHumanIterator = (age = 0, lifespan = 75) => {
   return that;
 };
 
-const personIt = createHumanIterator(7, 11);
+const personIt = createHumanIterator(0, 11);
 
 // (async () => {
-//   await logForAwaitOf(personIt);
+//   for await (const person of personIt) {
+//     console.log(person);
+//   }
 // })();
 
 // --------------------------------------------------------
@@ -193,5 +185,7 @@ const dogs = async (totalDogs = 3) => {
 
 // (async () => {
 //   const dogsIt = await dogs();
-//   await logForAwaitOf(dogsIt);
+//   for await (const dog of dogsIt) {
+//     console.log(dog);
+//   }
 // })();
