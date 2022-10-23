@@ -6,6 +6,7 @@
     "nodemon": "^2.0.20"
   },
   "scripts": {
-    "start": "nodemon index.js"
+    "it": "nodemon iterators.js",
+    "gen": "nodemon generators.js"
   }
 }
