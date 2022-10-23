@@ -75,7 +75,7 @@ async function* fightClubGenerator({ difficulty }) {
   let enemyHealth = 125 - (1 - difficulty) * 100;
 
   console.log("\nFIGHT!\n");
-  console.log(`You 🧡 ${playerHealth} --- Enemy 💙 ${enemyHealth}`);
+  console.log(`You 🧡  ${playerHealth} --- Enemy 💙  ${enemyHealth}`);
 
   while (playerHealth > 0 && enemyHealth > 0) {
     await fakeDelay(300 + Math.random() * 600);
@@ -92,11 +92,11 @@ async function* fightClubGenerator({ difficulty }) {
       yield "Game Over! 💀";
       return;
     } else if (enemyHealth <= 0) {
-      yield "You Won! 🌟⚔🌟";
+      yield "You Won! 🌟 ⚔ 🌟";
       return;
     }
 
-    yield `You 🧡 ${playerHealth} --- Enemy 💙 ${enemyHealth}`;
+    yield `You 🧡  ${playerHealth} --- Enemy 💙  ${enemyHealth}`;
   }
 }
 
